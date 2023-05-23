@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 
 $route['sekolah'] = 'sekolah/sekolah/index';
+$route['api/v1/auth/login'] = 'users/login';
 $route['sekolah/print/(:num)'] = 'sekolah/sekolah/print/$1';
 
 $route['404_override'] = 'JsonPage';
