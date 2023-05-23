@@ -23,16 +23,39 @@ class Users extends CI_Controller
 
 		$this->load->model('ModelUsers');
 		$load = [
-			"_level" => true
+			"_level" => true,
+			"_token" => true,
 		];
 		$mdl = new ModelUsers();
-		$mdl->cekId($load, $request['id_card_number'], $request['password']);
+		$mdl->cekIdDanPassword($load, $request['id_card_number'], $request['password']);
 		if($mdl->data){
 			$res = $mdl->data;
 			http_response_code(200);
 		}else{
 			$res = [
 				"message" => "ID Card Number or Password incorrect"
+			];
+			http_response_code(401);
+		}
+		echo json_encode($res);
+	}
+
+	public function logout($token)
+	{
+		$pecahData = explode("|", base64_decode($token));
+		$idUsers = $pecahData[0];
+//		validasi token => iduser
+		$this->load->model('ModelUsers');
+		$mdl = new ModelUsers();
+		$mdl->cekId($idUsers);
+		if($mdl->data){
+			$res = [
+				"message" => "sukses"
+			];
+			http_response_code(200);
+		}else{
+			$res = [
+				"message" => "logout gagal"
 			];
 			http_response_code(401);
 		}

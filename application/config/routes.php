@@ -53,6 +53,7 @@ $route['default_controller'] = 'welcome';
 
 $route['sekolah'] = 'sekolah/sekolah/index';
 $route['api/v1/auth/login'] = 'users/login';
+$route['api/v1/auth/logout/(:any)'] = 'users/logout/$1';
 $route['sekolah/print/(:num)'] = 'sekolah/sekolah/print/$1';
 
 $route['404_override'] = 'JsonPage';
